@@ -17,6 +17,11 @@ GPS Accurcy & Precison Testing: https://www.youtube.com/watch?v=qKELYZJ67d8&t=15
 Switching Between Autonomous and Manual Control Testing: https://www.youtube.com/watch?v=emZcUE4ue-M&t=8s <br/>
 
 # Images: <br/>
+  ![Boat Prototype](https://user-images.githubusercontent.com/104117150/164588852-5f07d6c0-d166-4189-8924-e7fbc01b8f6a.jpg) <br/>
+  Autonomous Hydrographic Boat Prototype
+  
+
+
 
 
 # About Us: <br/>
