@@ -23,7 +23,9 @@ https://www.raspberrypi.com/software/
 Setting up the Raspberry Pi
 * Insert micro SD card into Raspberry Pi
 * Connect mouse and keyboard
-* connect Raspberry PI to monitor
+* Connect Raspberry Pi to monitor through left micro HDMI port using adapter cable
+* Connect Raspberry Pi to power
+* Follow on screen instructions to setup Raspberry Pi OS
 
 
 Python
