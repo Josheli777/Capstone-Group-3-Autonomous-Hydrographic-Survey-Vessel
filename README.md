@@ -34,3 +34,8 @@ Switching Between Autonomous and Manual Control Testing: https://www.youtube.com
  
 # About Us: <br/>
 The team members involved in the construction of the autonomous hydrographic boat are Andrew Alley, Carter Ashby, Levi Daniel, & Joshua Herrera. Mr. Jesse Roberts provided guidance and insight thoughout the duration of the project. This project was funded by Dr. Alfred Kalyanapu on behalf of the Tennessee Tech Water Center.
+
+# Repository Contents: <br/>
+
+Project Documentation: Reports that document the design process for this project
+Software: Guides for installing computer applications, programming libraries, and operating systems necessary for this project.
