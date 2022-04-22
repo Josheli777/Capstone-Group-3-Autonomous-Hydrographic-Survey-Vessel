@@ -1,6 +1,14 @@
 Raspberyy Pi:
+Parts Needed:
+  * Keyboard
+  * Mouse
+  * 16 GB SD card
+  * SD card reader
 
-Raspbian Operating System: https://www.raspberrypi.com/software/
+Download 
+
+Raspbian Operating System: 
+https://www.raspberrypi.com/software/
 
 Python
 
