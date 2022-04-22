@@ -13,7 +13,7 @@ Data Transmission: Rather than testing the radio module's transmission range at 
 
 GPS Accuracy and Precision: Using two simpleRTK2b receivers, the accuracy and precision of the recorded GPS data was observed. The receivers were in a base and rover configuration. Using just the rover receiver, the GPS coordinates were accurate to within 1.4 meters and precise to within 10 centimeters. Using the base station and the rover, the accuracy was around 1.9 meters and the precision was 2 centimeters. The base station and rover were tested again with the known location of the base station uploaded to the base station receiver. The accuracy was withing 2 cm and the precision was within 3 cm.
 
-# Video of Project Tesging: <br/>
+# Video of Project Testing: <br/>
 
 
 
