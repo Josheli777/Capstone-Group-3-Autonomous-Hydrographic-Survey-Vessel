@@ -11,6 +11,12 @@ Battery Testing: Thw Water Center had a specification that the autonomous boat m
 
 Data Transmission: Rather than testing the radio module's transmission range at Cane Creek Lake, the team tested the range on campus because the hull was taken to get coated in more fiberglass. One team member stood outside of Foster Hall on Tennessee Tech's campus with the laptop and land radio module, while two other team members carried the rover radio module down University Drive until the land module could not receive any data. Data transmission slowed down once the team members crossed North Willow Avenue going towards Tech Village. The last received transmission was about 596 m.
 
+GPS Accuracy and Precision: Using two simpleRTK2b receivers, the accuracy and precision of the recorded GPS data was observed. The receivers were in a base and rover configuration. Using just the rover receiver, the GPS coordinates were accurate to within 1.4 meters and precise to within 10 centimeters. Using the base station and the rover, the accuracy was around 1.9 meters and the precision was 2 centimeters. The base station and rover were tested again with the known location of the base station uploaded to the base station receiver. The accuracy was withing 2 cm and the precision was within 3 cm.
+
+# Video of Project Tesging: <br/>
+
+
+
 # Video of Experimental Analysis: <br/>
 Battery Testing: https://www.youtube.com/embed/ibnFtC95N1E <br/>
 Data Transmission Range Testing: https://www.youtube.com/embed/1JbO_NOVdsQ <br/>
