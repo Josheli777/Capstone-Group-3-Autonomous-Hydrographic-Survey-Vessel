@@ -37,5 +37,5 @@ The team members involved in the construction of the autonomous hydrographic boa
 
 # Repository Contents: <br/>
 
-Project Documentation: Reports that document the design process for this project
+Project Documentation: Reports that document the design process for this project.
 Software: Guides for installing computer applications, programming libraries, and operating systems necessary for this project.
