@@ -1,14 +1,30 @@
-Raspberyy Pi:
+# Raspberyy Pi:
 Parts Needed:
   * Keyboard
   * Mouse
-  * 16 GB SD card
-  * SD card reader
+  * 16 GB micro SD card
+  * micro SD card reader
+  * micro HDMI to HDMI cable
+  * 5V 3A power cable
 
-Download 
-
-Raspbian Operating System: 
+Installing Raspberry Pi OS
+Download Raspberry Pi Imager:
 https://www.raspberrypi.com/software/
+
+
+* Insert micro SD card into PC using micro SD card reader
+* Open Imager
+* Click "Choose OS"
+* Click "Raspberry Pi OS (32-bit)
+* Click "Choose Storage" and select the inserted SD card
+* Click "Write"
+* Eject SD card when done
+
+Setting up the Raspberry Pi
+* Insert micro SD card into Raspberry Pi
+* Connect mouse and keyboard
+* connect Raspberry PI to monitor
+
 
 Python
 
