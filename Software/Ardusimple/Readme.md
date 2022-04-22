@@ -27,6 +27,16 @@ Make sure to download u-center and NOT u-center2 . The chip in the simpleRTK2b r
 * Disconnect receiver
 * Done
 
+To upload the known location of the base station to the receiver, do the following:
+* Plug in the base station to your laptop or PC
+* Open u-center
+* Click "View", "Configuration View", "TMODE3", "fixed mode"
+* Click "Use Lat/Lon/Alt position"
+* Enter in latitude, longitude and altitude.
+* Click "Send", "Poll", exit and save the configurations.
+* Exit window
+* Done
+
 
 ### Rover:
 
