@@ -1,4 +1,4 @@
-# Raspberyy Pi:
+# Raspberry Pi:
 Parts Needed:
   * Keyboard
   * Mouse
