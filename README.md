@@ -1,6 +1,6 @@
 # Capstone-Group-3-Autonomous-Hydrographic-Survey-Vessel
 
-# Introduction: <br/>
+# Introduction:
 Hydrography is the science of surveying and measuring different bodies of water, such as lakes, rivers, oceans, etc. These analyses are crucial for determining the shape of the water body. This data obtained from hydrography can be used to monitor the effects of climate change, beach erosion, and natural disaster prediction. Additionally, civil engineers must know the layout of a body of water before starting projects like dredging, diverting water sources, building docks, etc. The Tennessee Water Center currently has boats that take hydrographic projections that are remote-controlled; however, this technology is prone to human error and lacks efficiency that could be further improved by automation. There are currently autonomous vehicles that take measurements accurately and precisely. These boats take GPS coordinates and create parallel lines for the boat to travel to retreive less repetitious measurements.  The Water Center has contacted us to design a boat that has similar functionality to commerically avaialble hydrographic boats but at a significantly lower cost. The Water Center has asked that the boat can transmit GPS data and depth measurements in real time to allow surveyors to determine if data is accurate. If the data is not accurate, the team will be able to immediately bring the boat back to land base and not have to wait for the boat to complete its run. 
 
 # Project Capabilities: <br/>
