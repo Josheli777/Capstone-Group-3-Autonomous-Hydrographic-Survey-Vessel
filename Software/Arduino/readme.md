@@ -18,7 +18,7 @@ The external RF24 library is used to control the radio modules in both scripts. 
 The Arduino SoftwareSerial library is used by the rover Arduino to make two GPIO pins (2,3) function as serial pins (TX/RX).
 
 ## Installation
-Both .ino files can be downloaded and opened in the Arduino IDE. To upload the scripts to the Arduinos, connect the computer running the IDE to the USB port of the approprate Arduino and select "Upload". When the "Done uploading" message is displayed, the program will now execute on power-on until it is overwritten by another program. For more details on using the Arduino IDE follow https://docs.arduino.cc/learn/starting-guide/the-arduino-software-ide
+Both .ino files can be downloaded and opened in the Arduino IDE. To upload the scripts to the Arduinos, connect the computer running the IDE to the USB port of the approprate Arduino and select "Upload". Note that the .ino files must be in a folder of the same name (excluding the '.ino') to upload properly. When the "Done uploading" message is displayed, the program will now execute on power-on until it is overwritten by another program. For more details on using the Arduino IDE follow https://docs.arduino.cc/learn/starting-guide/the-arduino-software-ide
 
 ## How to Operate
 Refer to the design schematics to connect power and onboard components to the rover Arduino. The uploaded program will execute at power-on.<br/><br/>
