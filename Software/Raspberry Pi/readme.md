@@ -27,39 +27,54 @@ Setting up the Raspberry Pi
 * Connect Raspberry Pi to power
 * Follow on screen instructions to setup Raspberry Pi OS
 
+
 Upgrade the Raspberry Pi:
 
 ```
 sudo apt update
 sudo apt full-upgrade
 ```
-
-Check Python Version
+ 
+Install git if not installed already
+```
+sudo apt install git
 ```
 
+Install pip
+```
+sudo apt get-install python3-pip
 ```
 
-git
+Install numpy
+```
+pip install numpy
+```
 
-pip
+Install proj
+```
+pip install proj
+```
 
-pip3
+Install pyproj
+```
+pip install pyproj
+```
 
-miniconda
+Install stateplane
+```
+pip install stateplane
+```
 
-anaconda
+In order for the Raspberry Pi to interface with the GPS receiver, type the following command:
+```
+sudo raspi-config
+```
 
-stateplane
+Select Interfacing Options, Serial, No, Yes, Finish
 
-rpi
+Now you can use the python program above. <br/>
 
-gdal
+To enter a predetermined path into the program, enter a list of latitude points into the lats[] list and enter longitude points into the lons[] list.
+Change the countyfips value to the one corresponding to your state and county.
 
-proj
-
-pyproj
-
-numpy
-
-osgeo
 
