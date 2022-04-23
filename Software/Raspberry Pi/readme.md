@@ -27,8 +27,17 @@ Setting up the Raspberry Pi
 * Connect Raspberry Pi to power
 * Follow on screen instructions to setup Raspberry Pi OS
 
+Upgrade the Raspberry Pi:
 
-Python
+```
+sudo apt update
+sudo apt full-upgrade
+```
+
+Check Python Version
+```
+
+```
 
 git
 
