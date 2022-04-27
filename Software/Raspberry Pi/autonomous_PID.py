@@ -45,11 +45,13 @@ lformax = 17
 rformin = 17
 rformax = 17.6
 
-left = 16
+#Starting thrust for the left and right motors as a duty cycle %
+left = 16 
 right = 17
 quad = 0
 wait = 0
 
+#LED signal
 GPIO.output(22, GPIO.LOW)
 GPIO.output(27, GPIO.LOW)
 GPIO.output(22, GPIO.HIGH)
@@ -77,6 +79,7 @@ def unicode(serial):
         parsed = serialdecode.split(",")
     return parsed
 
+# Checks if a data field in a list is a number
 def isnumber(data, value):
     number = True
     try:
@@ -159,6 +162,8 @@ def location():
     return [latitude, longitude, course, statelat, statelon] #add course
 
 
+#Calculate the distance between the current position and the next waypoint
+#Also calculates the distance between the current position and the desired path
 def distance(lat1,lon1,lat2,lon2,slat,slon,A,B,C):
     R=6371000                               # radius of Earth in meters
     phi_1=math.radians(lat1)
@@ -179,13 +184,14 @@ def distance(lat1,lon1,lat2,lon2,slat,slon,A,B,C):
     return [waydist, pathdist, cte]
 
 
+#Calculates the trajectory angle
 def direction(slat1, slon1, slat2, slon2):
     if (slon2-slon1) == 0:
         traj = 90
 
     elif slat1 == slat2:
         traj = 0
-
+        
     else:
         traj = math.degrees((math.atan2((slat2-slat1),(slon2-slon1))))
 
@@ -206,7 +212,7 @@ def direction(slat1, slon1, slat2, slon2):
 
     return [traj, quad]
 
-
+#Changes the thrust of the motors to the input duty cycles
 def thrust(right,left):
     if (right > rformax):
         right = right - 1
@@ -218,6 +224,7 @@ def thrust(right,left):
     pwmleft.ChangeDutyCycle(left)
 
 
+#Waits for good data
 while n > 0:
     RMC = location()
     
@@ -230,7 +237,6 @@ while n > 0:
 
     if wait > 120:
         n = 0
-
     time.sleep(1)
 
 
@@ -241,9 +247,11 @@ pwmright.ChangeDutyCycle(rformax)
 pwmleft.ChangeDutyCycle(lformax)
 time.sleep(3)
 
+
+#Starts moving
 for i in range(0,len(lats)):
-    waydistance = 10
-    waydist1 = 100000
+    waydistance = 100000   # Set initial distance
+    waydist1 = 100000      # Set initial distance 
     error1 = 100000
     lat1 = lats[i]
     lon1 = lons[i]
@@ -254,7 +262,9 @@ for i in range(0,len(lats)):
     A = -1*slopes[i]
     B = 1
     C = -1*intercepts[i]
-
+    
+    # Checks if the distance from the next point is more than 9 centimeters
+    # This distance is in latitude degrees
     while (waydistance > 0.00009):
 
         RMC = location()
@@ -272,7 +282,8 @@ for i in range(0,len(lats)):
         leftright = param[2]
         dir2 = direction(slat1, slon1, slat2, slon2)
         quad = dir2[1]
-
+        
+        #Scaling constant for the thrust duty cycles
         scale = 1 + ((error2-error1)/100)
         if (waydist2 > waydist1):
             left = lformax
