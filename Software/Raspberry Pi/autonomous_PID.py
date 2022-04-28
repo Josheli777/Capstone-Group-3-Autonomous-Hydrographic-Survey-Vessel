@@ -30,7 +30,9 @@ for i in range(0,len(lats)):
     [slat,slon] = stateplane(lats[i],lons[i])
     if i < len(lats):
         [slat2,slon2] = stateplane(lats[i+1],lons[i+1])
-        thetas[i] = math.degrees(math.atan2())
+        thetas[i] = math.degrees(math.atan2((slat2-slat),(slon2-slon)))
+        if (thetas[i] < 0):
+            thetas[i] = thetas[i]+360
         
     else:
         [slat2,slon2] = stateplane(lats[i],lons[i])
@@ -79,6 +81,7 @@ time.sleep(5)
 GPIO.output(22, GPIO.LOW)
 GPIO.output(27, GPIO.LOW)
 
+
 ##########################################################
 
 #Check if NMEA sentence is correct
@@ -100,6 +103,7 @@ def unicode(serial):
         parsed = serialdecode.split(",")
     return parsed
 
+
 ##########################################################
 
 # Checks if a data field in a list is a number
@@ -116,6 +120,7 @@ def isnumber(data, value):
         num= 0
 
     return num
+
 
 ##########################################################
 
@@ -186,6 +191,7 @@ def location():
 
     return [latitude, longitude, course, statelat, statelon] #add course
 
+
 ##########################################################
 
 #Calculate the distance between the current position and the next waypoint
@@ -206,8 +212,8 @@ def distance(lat1,lon1,lat2,lon2,slat,slon,A,B,C):
     waydist = R*c                         # output distance in meters
     cte = (( A * slon)+( B * slat) + C )/math.sqrt(( A ** 2)+1)
     pathdist = abs(cte)
-    #leftright = (( A * lon2)+( B * lat2) + C )
     return [waydist, pathdist, cte]
+
 
 ##########################################################
 
@@ -236,6 +242,7 @@ def direction(slat1, slon1, slat2, slon2):
 
     return [traj, quad]
 
+
 ##########################################################
 
 #Changes the thrust of the motors to the input duty cycles
@@ -249,8 +256,30 @@ def thrust(right,left):
     pwmright.ChangeDutyCycle(right)
     pwmleft.ChangeDutyCycle(left)
 
+
 ##########################################################
+
+def anglediff(theta1,theta2):
     
+    if (theta1 <= 180):
+        if (theta2 > (theta1+180)):
+            delta = ((theta1+360)-theta2)
+        elif(theta2 < theta1):
+            delta = theta1-theta2
+        elif (theta2 > theta1) and (theta2 < (theta1+180)):
+            delta = (delta_theta)
+    else:
+        if (theta2 < (theta1-180)):
+            delta = ((theta2+360)-theta1)
+        elif (theta2 > theta1):
+            delta = (delta_theta)
+        elif (theta2 > (theta1-180)) and (theta2 < theta1):
+            delta = (theta1-theta2)
+    
+    return delta
+
+##########################################################
+
 #Waits for good data
 while n > 0:
     RMC = location()
@@ -266,6 +295,7 @@ while n > 0:
         n = 0
     time.sleep(1)
 
+
 ##########################################################
 
 # LED flash
@@ -276,6 +306,7 @@ pwmright.ChangeDutyCycle(rformax)
 pwmleft.ChangeDutyCycle(lformax)
 time.sleep(3)
 
+
 ##########################################################
 
 #Starts moving
@@ -283,14 +314,15 @@ for i in range(0,len(lats)):
     
     waydistance = 100000   # Set initial distance
     waydist1 = 100000      # Set initial distance 
-    error1 = 100000        # Set initial error
+    error1 = 0        # Set initial error
     lat1 = lats[i]         # Gets next waypoint latitude
     lon1 = lons[i]         # Gets next waypoint longitude
     
     state1 = stateplane.from_latlon(lat1, lon1)    # Converts to stateplane coordinate system
     slat1 = state1[0]
     slon1 = state1[1]
-    angle = thetas[i]
+    thetas1 = thetas[i]
+    rad1 = math.radians(thetas1)
     M = slopes[i]
     A = -1*slopes[i]
     B = 1
@@ -316,10 +348,12 @@ for i in range(0,len(lats)):
         leftright = param[2]
         dir2 = direction(slat1, slon1, slat2, slon2)
         quad = dir2[1]
-        traj = dir2[0]
+        thetas2 = dir2[0]
+        rad2 = math.radians(thetas2)
         
         #Scaling constant for the thrust duty cycles
         scale = ((error2-error1)/100)
+        delta_theta = anglediff(thetas1, thetas2)
         
         # Turn around if boat is going the opposite direction
         if (waydist2 > waydist1):
@@ -328,44 +362,35 @@ for i in range(0,len(lats)):
             thrust(right,left)
             time.sleep(4)
             
+        
         elif (error2 > 0.6):
             if (error2 > error1):
                 if (quad == 2) or (quad == 3):
-                    left = left + (scale*left*((theta2-theta1)/10))
-                    right = right + (scale*right*((theta2-theta1)/10))
+                    left = left + (scale*left*((delta_theta)/10))
+                    right = right + (scale*right*((delta_theta)/10))
+
+                elif (quad == 1) or (quad == 4):
+                    left = left + (scale*left*((delta_theta)/10))
+                    right = right + (scale*right*((delta_theta)/10))
+        
+        # Checks if max or min thrust has been exceeded and sets to max or min respectively   
+        if (left>lformax):
+            left = lformax
+            right = rformin
+            
+        elif (right>rformax):
+            left = lformin
+            right = rformax
+            
+        if (left<lstill):
+            left = lstill
+            
+        elif (right<rstill):
+            right = rformax
                     
-                    if leftright > 0:
-                        left = left*scale
-                        right = right*(2-scale)
-                        if (left>lformax):
-                            left = lformax
-                            right = rformin
-
-                    elif leftright < 0:
-                        right = right*scale
-                        left = left*(2-scale)
-                        if (right>rformax):
-                            left = lformin
-                            right = rformax
-
-                if (quad == 1) or (quad == 4):
-                    if leftright < 0:
-                        left = left*scale
-                        right = right*(2-scale)
-                        if (left>lformax):
-                            left = lformax
-                            right = right*(2-scale)
-
-                    elif leftright > 0:
-                        right = right*scale
-                        left = left*(2-scale)
-                        if (right>rformax):
-                            left = left*(2-scale)
-                            right = rformax
-
         thrust(right,left)
         waydist1 = waydist2
         error1 = error2
 
+    GPIO.cleanup()
 
-GPIO.cleanup()
