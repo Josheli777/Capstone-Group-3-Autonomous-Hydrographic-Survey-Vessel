@@ -24,7 +24,24 @@ lons = [-85.5473399, -85.5476269, -85.5479139, -85.5477637, -85.5474821, -85.547
 
 slopes = []
 intercepts = []
+thetas = []
 
+for i in range(0,len(lats)):
+    [slat,slon] = stateplane(lats[i],lons[i])
+    if i < len(lats):
+        [slat2,slon2] = stateplane(lats[i+1],lons[i+1])
+        thetas[i] = math.degrees(math.atan2())
+        
+    else:
+        [slat2,slon2] = stateplane(lats[i],lons[i])
+        thetas[i] = 0   
+    
+    m = (slat-slat2)/(slon-slon2)
+    b = slat-(m * slon)
+    slopes.append(m)
+    intercepts.append(b)
+    
+    
 pwmleft = GPIO.PWM(10, 100)
 pwmleft.start(14.2)
 pwmright = GPIO.PWM(9, 100)
@@ -273,6 +290,7 @@ for i in range(0,len(lats)):
     state1 = stateplane.from_latlon(lat1, lon1)    # Converts to stateplane coordinate system
     slat1 = state1[0]
     slon1 = state1[1]
+    angle = thetas[i]
     M = slopes[i]
     A = -1*slopes[i]
     B = 1
@@ -287,7 +305,6 @@ for i in range(0,len(lats)):
         lon2 = RMC[1]
         slat2 = RMC[3]
         slon2 = RMC[4]
-        #angle = RMC[2]
         
         # Calculate distance to next waypoint, cross track error, and a value that
         # determines if the boat should turn left or right.
@@ -299,6 +316,7 @@ for i in range(0,len(lats)):
         leftright = param[2]
         dir2 = direction(slat1, slon1, slat2, slon2)
         quad = dir2[1]
+        traj = dir2[0]
         
         #Scaling constant for the thrust duty cycles
         scale = ((error2-error1)/100)
