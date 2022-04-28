@@ -247,11 +247,6 @@ def direction(slat1, slon1, slat2, slon2):
 
 #Changes the thrust of the motors to the input duty cycles
 def thrust(right,left):
-    if (right > rformax):
-        right = right - 1
-
-    if (left > lformax):
-        left = left - 1
 
     pwmright.ChangeDutyCycle(right)
     pwmleft.ChangeDutyCycle(left)
@@ -259,7 +254,7 @@ def thrust(right,left):
 
 ##########################################################
 
-def anglediff(theta1,theta2):
+def anglediff(theta1,theta2,quad):
     
     if (theta1 <= 180):
         if (theta2 > (theta1+180)):
@@ -267,14 +262,19 @@ def anglediff(theta1,theta2):
         elif(theta2 < theta1):
             delta = theta1-theta2
         elif (theta2 > theta1) and (theta2 < (theta1+180)):
-            delta = (delta_theta)
+            delta = (theta2-theta1)
+        
+        
     else:
         if (theta2 < (theta1-180)):
             delta = ((theta2+360)-theta1)
         elif (theta2 > theta1):
-            delta = (delta_theta)
+            delta = (theta2-theta1)
         elif (theta2 > (theta1-180)) and (theta2 < theta1):
             delta = (theta1-theta2)
+            
+    if (quad == 2) or (quad == 3):
+        
     
     return delta
 
@@ -353,7 +353,7 @@ for i in range(0,len(lats)):
         
         #Scaling constant for the thrust duty cycles
         scale = ((error2-error1)/100)
-        delta_theta = anglediff(thetas1, thetas2)
+        dtheta = anglediff(thetas1, thetas2)
         
         # Turn around if boat is going the opposite direction
         if (waydist2 > waydist1):
@@ -366,12 +366,12 @@ for i in range(0,len(lats)):
         elif (error2 > 0.6):
             if (error2 > error1):
                 if (quad == 2) or (quad == 3):
-                    left = left + (scale*left*((delta_theta)/10))
-                    right = right + (scale*right*((delta_theta)/10))
+                    left = lformin - (scale*lformin) + ((dtheta/100)*lformin)
+                    right = rformin + (scale*rformin) + ((dtheta/100)*rformin)
 
                 elif (quad == 1) or (quad == 4):
-                    left = left + (scale*left*((delta_theta)/10))
-                    right = right + (scale*right*((delta_theta)/10))
+                    left = lformin + (scale*lformin) + ((dtheta/100)*lformin)
+                    right = rformin - (scale*rformin) + ((dtheta/100)*rformin)
         
         # Checks if max or min thrust has been exceeded and sets to max or min respectively   
         if (left>lformax):
@@ -393,4 +393,5 @@ for i in range(0,len(lats)):
         error1 = error2
 
     GPIO.cleanup()
+
 
