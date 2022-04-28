@@ -196,27 +196,24 @@ def distance(lat1,lon1,lat2,lon2,slat,slon,A,B,C):
 
 #Calculates the trajectory angle
 def direction(slat1, slon1, slat2, slon2):
+    
     if (slon2-slon1) == 0:
         traj = 90
-
-    elif slat1 == slat2:
-        traj = 0
         
-    else:
-        traj = math.degrees((math.atan2((slat2-slat1),(slon2-slon1))))
-
+    traj = math.degrees((math.atan2((slat2-slat1),(slon2-slon1))))
+    
+    if slat1 == slat2:
+        traj = 0
+    
+    # Calculate Qudrant
     if traj < 0:
         traj = traj + 360
-
     if traj >= 0:
         quad = 1
-
     if traj > 90:
         quad = 2
-
     if traj > 180:
         quad = 3
-
     if traj > 270:
         quad = 4
 
@@ -304,7 +301,7 @@ for i in range(0,len(lats)):
         quad = dir2[1]
         
         #Scaling constant for the thrust duty cycles
-        scale = 1 + ((error2-error1)/100)
+        scale = ((error2-error1)/100)
         
         # Turn around if boat is going the opposite direction
         if (waydist2 > waydist1):
@@ -313,9 +310,12 @@ for i in range(0,len(lats)):
             thrust(right,left)
             time.sleep(4)
             
-        if (error2 > 0.6):
+        elif (error2 > 0.6):
             if (error2 > error1):
                 if (quad == 2) or (quad == 3):
+                    left = left + (scale*left*((theta2-theta1)/10))
+                    right = right + (scale*right*((theta2-theta1)/10))
+                    
                     if leftright > 0:
                         left = left*scale
                         right = right*(2-scale)
