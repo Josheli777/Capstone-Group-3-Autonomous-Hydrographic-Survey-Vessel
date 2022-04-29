@@ -30,6 +30,7 @@ Data Transmission Range Testing: https://www.youtube.com/embed/1JbO_NOVdsQ <br/>
 Speed Testing: https://www.youtube.com/watch?v=HDup7zcuE3E&t=6s <br/>
 GPS Accurcy & Precison Testing: https://www.youtube.com/watch?v=qKELYZJ67d8&t=15s <br/>
 Switching Between Autonomous and Manual Control Testing: https://www.youtube.com/watch?v=emZcUE4ue-M&t=8s <br/>
+Updated Battery Monitor: https://youtube.com/shorts/7BtCwoOhJbw?feature=share <br/>
 
 # Images: <br/>
   ![Boat Prototype](https://user-images.githubusercontent.com/104117150/164588852-5f07d6c0-d166-4189-8924-e7fbc01b8f6a.jpg) <br/>
