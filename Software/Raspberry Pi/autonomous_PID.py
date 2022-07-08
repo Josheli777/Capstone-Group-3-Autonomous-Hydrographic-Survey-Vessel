@@ -1,3 +1,9 @@
+# This code is incomplete and not functional. The following resourse will likely be useful for continued development of the PID algorithm (specifically Chapter 3). Purchase and integration of a compass would also be very valuable.
+
+# Navigation & control of an automated SWATH surface vessel for bathymetric mapping, Ketan Rasal, Santa Clara University, 2013
+# https://scholarcommons.scu.edu/cgi/viewcontent.cgi?article=1001&context=mech_mstr
+
+
 import RPi.GPIO as GPIO
 import time
 import serial
