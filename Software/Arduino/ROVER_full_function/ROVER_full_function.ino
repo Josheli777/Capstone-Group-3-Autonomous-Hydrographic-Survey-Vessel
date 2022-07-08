@@ -1,3 +1,6 @@
+// This might help solve the anti-static bag problem: https://www.youtube.com/watch?v=VOC2JRLQZh0
+// Plenty of other methods can be found with a quick search of "fixing range of nRF24l01+ pa/lna module"
+
 #include <SPI.h>
 #include "printf.h"
 #include "RF24.h"
